@@ -61,7 +61,7 @@ Based on this plot, more education does appear to be associated with higher wage
 
 The OLS regression of lwage on educ might not give us the causal effect of education. One reason why people with more education might earn more even if education itself had no effect is because people with more education, may be those with more financial resources to go to school for longer, and these financial resources also allow them to have more more connections and better job opportunities via a higher earning network. Another reason why people with more education might earn more even if education itself has no effect, is if people who get more education are fundamentally those that have higher performance abilities. As a result, these people are also more systematically likely to do better at work, have better job, and have higher earnings.
 
-#### 2 The Instrument: College Proximity 
+#### 2 The Instrument: College Proximity
 
 ```{r}
 mean(card$nearc4, na.rm=TRUE)
@@ -110,7 +110,7 @@ card_summ
 
 The groups do not appear to be balanced. If we look at the table there appear to be slightly less black people that lived near colleges, there appear to be a substantial amount more people that lived in a metropolitan area that lived near colleges, and there appear to be less people that lived in the south that lived near colleges. These imbalances tell us that there may be a lot of outside variables affecting wage. In our study black, smsa, and south are not randomly assigned and nearc4 is not as good as randomly assigned so exogeneity could be a threat to the validity of the instrument.
 
-#### 3 The Wald Estimator 
+#### 3 The Wald Estimator
 
 ```{r}
 #3.1
@@ -173,9 +173,7 @@ modelsummary(list("OLS" = ols, "2SLS" = iv), coef_map = c("educ" = "Years of Edu
 
 \(a\) The coefficient of the 2SLS is greater.
 
-\(b\) Card (1995) interprets the finding that 2SLS \> OLS as evidence of downward bias in OLS. One thing that could cause OLS to underestimate the return to education is measurement error. If we think about educ, it is an endogenous variable that measures years of completed education. If in fact this variable is measured incorrectly, it could indicate that education has a greater effect on wage than the model expected, this is attenuation bias.
-(c) I believe the estimate from the 2SLS is more credible as a causal estimate of the effect of education on wages. This is because the OLS estimate is at risk of the omitted variable bias, as the included variables are all at the subjective disgression of the person running the model. With 2SLS, the model is able to
-eliminate variation due to the near college instrumental variable.
+\(b\) Card (1995) interprets the finding that 2SLS \> OLS as evidence of downward bias in OLS. One thing that could cause OLS to underestimate the return to education is measurement error. If we think about educ, it is an endogenous variable that measures years of completed education. If in fact this variable is measured incorrectly, it could indicate that education has a greater effect on wage than the model expected, this is attenuation bias. (c) I believe the estimate from the 2SLS is more credible as a causal estimate of the effect of education on wages. This is because the OLS estimate is at risk of the omitted variable bias, as the included variables are all at the subjective disgression of the person running the model. With 2SLS, the model is able to eliminate variation due to the near college instrumental variable.
 
 ```{r}
 #4.5
@@ -199,17 +197,14 @@ twosls_iq
 
 #### 5 Interpretation and LATE
 
-**5.1 Who are the compliers?**
-In this context, the compliers are individuals who would not have otherwise gone to college but decided to go to college because they happened to grow up near a 4-year college. For instance, these could be people that living near a college allowed for the costs associated with going to college to be cheaper so they could go to a college because they lived near it.
+**5.1 Who are the compliers?** In this context, the compliers are individuals who would not have otherwise gone to college but decided to go to college because they happened to grow up near a 4-year college. For instance, these could be people that living near a college allowed for the costs associated with going to college to be cheaper so they could go to a college because they lived near it.
 
-5.2 Write the LATE interpretation
+**5.2 Write the LATE interpretation**
 
 Write a single careful sentence interpreting the 2SLS coeﬀicient as a LATE. Your sentence should specify:
 
-The
+The causal effect of an additional year of schooling on wages is about a 12.5% increase in expected wage for those individuals whose educational attainment increased because they lived near a college, identified by variation in nearc4, as living near a college decreases the cost of attending univeristy thereby changing education.
 
-\(i\) The causal effect being measured
+**5.3 External validity**
 
-\(ii\) For which specific group of people
-
-\(iii\) What source of variation identifies it
+Card finds a 2SLS estimate around 12–13% return to each additional year of education. In this case, the LATE is likely not going to be the same as the ATE (the return for the average person in the sample). This is because the compliers, the men who went to more school because they happened to live near a college, are likely to have higher returns to education than the typical person. When we think about these compliers, they likely are more economically disadvantaged and would not have had the opportunity to get increased schooling. However, because of where they live, they were able to acquire more education, and probably experience more gains from an additional year of schooling than the average person. This is because this additional schooling for compliers could open up all sorts of doors for the compliers that they would not of otherwise have had access too with their financial backgrounds, but the average person might have had more access to. As a result, the LATE is probably bigger than the ATE which makes sense considering the IV estimate is larger than the ols one.
