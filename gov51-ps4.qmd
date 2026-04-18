@@ -69,7 +69,7 @@ mean(card$nearc4, na.rm=TRUE)
 
 **2.1 What the instrument measures**
 
-The variable nearc4 equals 1 if the respondent grew up near a 4-year college. The share of respondents in this sample that grew up near a 4-year college is 0.682 or about 68.2 people per 100 respondents (68.2%).
+The variable nearc4 equals 1 if the respondent grew up near a 4-year college. The share of respondents in this sample that grew up near a 4-year college is 0.682 or about 68.2%.
 
 ```{r}
 #2.2
@@ -108,7 +108,7 @@ card_summ
 
 2.5 Balance check
 
-The groups do not appear to be balanced. If we look at the table there appear to be slightly less black people that lived near colleges, there appear to be a substantial amount more people that lived in a metropolitan area that lived near colleges, and there appear to be less people that lived in the south that lived near colleges. These imbalances tell us that there may be a lot of outside variables affecting wage. In our study black, smsa, and south are not randomly assigned and nearc4 is not as good as randomly assigned so exogeneity could be a threat to the validity of the instrument.
+The groups do not appear to be balanced. If we look at the table there appear to be slightly less black people that lived near colleges, there appear to be a substantial amount more people that lived in a metropolitan area that lived near colleges, and there appear to be less people that lived in the south that lived near colleges. These imbalances tell us that there may be a lot of outside variables affecting wage. In our study black, smsa, and south are not randomly assigned and nearc4 is likely not as good as randomly assigned so exogeneity could be a threat to the validity of the instrument.
 
 #### 3 The Wald Estimator
 
@@ -121,7 +121,7 @@ reduced_form
 
 **3.1 Compute the reduced form**
 
-The coeﬀicient on nearc4 is 0.041. This tells us that those that living near a college is on average associated with a 4.1% increase in wages, holding constant being black, lived in a metropolitan area, lived in the South, potential labor market experience (years), experience squared, and married.
+The coeﬀicient on nearc4 is 0.041. This tells us that those that living near a college is on average associated with approximately a 4.1% increase in wages, holding constant being black, lived in a metropolitan area, lived in the South, potential labor market experience (years), experience squared, and married.
 
 ```{r}
 #3.2
@@ -139,7 +139,7 @@ The Wald estimator is 0.125.
 
 **3.3 Interpret the Wald estimator**
 
-The wald estimate says that the effect of one additional year of education is associated with a with a change in outcome, wages, of +12.5%.
+The wald estimate says that the effect of one additional year of education changes the outcome, wages, by +12.5%.
 
 #### 4 OLS vs 2SLS
 
@@ -173,7 +173,9 @@ modelsummary(list("OLS" = ols, "2SLS" = iv), coef_map = c("educ" = "Years of Edu
 
 \(a\) The coefficient of the 2SLS is greater.
 
-\(b\) Card (1995) interprets the finding that 2SLS \> OLS as evidence of downward bias in OLS. One thing that could cause OLS to underestimate the return to education is measurement error. If we think about educ, it is an endogenous variable that measures years of completed education. If in fact this variable is measured incorrectly, it could indicate that education has a greater effect on wage than the model expected, this is attenuation bias. (c) I believe the estimate from the 2SLS is more credible as a causal estimate of the effect of education on wages. This is because the OLS estimate is at risk of the omitted variable bias, as the included variables are all at the subjective disgression of the person running the model. With 2SLS, the model is able to eliminate variation due to the near college instrumental variable.
+\(b\) Card (1995) interprets the finding that 2SLS \> OLS as evidence of downward bias in OLS. One thing that could cause OLS to underestimate the return to education is measurement error. If we think about educ, it is an endogenous variable that measures years of completed education. If in fact this variable is measured incorrectly, it could indicate that education has a greater effect on wage than the model expected, this is attenuation bias.
+
+\(c\) I believe the estimate from the 2SLS is more credible as a causal estimate of the effect of education on wages. This is because the OLS estimate is at risk of the omitted variable bias, as the included variables are all at the subjective disgression of the person running the model. With 2SLS, the model is able to use only variation in education due to the near college instrumental variable.
 
 ```{r}
 #4.5
@@ -189,11 +191,11 @@ twosls_iq
 
 **4.5 Adding IQ as a control**
 
-\(a\) Including IQ changes the OLS coeﬀicient on educ by decreasing it to 0.068 from 0.071. This
+\(a\) Including IQ changes the OLS coeﬀicient on educ by decreasing it to 0.068 from 0.071.
 
-\(b\) The 2SLS estimate decreases to 0.109 from 0.125 or by 0.016.
+\(b\) The 2SLS estimate decreases to 0.109 from 0.125 or by 0.016. It changes a bit but not extremely susbtantially with 0.016 being a relatively smaller value.
 
-\(c\) These comparisons between part (a) and part (b) suggest that IQ is one source of bias that impacts the model as it causes both the OLS and 2SLS estimates to decrease. However, the OLS and 2SLS estimates still remain relatively different indicating there are other reasonings why the IV estimate is greater than OLS.
+\(c\) These comparisons between part (a) and part (b) suggest that IQ is one source of bias that impacts the model as it causes both the OLS and 2SLS estimates to decrease. However, the OLS and 2SLS estimates still remain relatively different indicating there are other reasonings why the IV estimate is greater than OLS. it is also interesting to note that OLS changes more than the 2SLS which makes sense given that the IV would likely eliminate some of the OVB in the 2SLS that the OLS does not account for.
 
 #### 5 Interpretation and LATE
 
